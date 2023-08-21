@@ -1,26 +1,12 @@
-# https://www.shure.com/en-US/performance-production/louder/all-about-wireless-intermodulation-distortion
 import itertools
 
-#frequencies = [400.01, 400.13, 400.25, 400.37, 400.49, 400.63, 400.75, 400.89]
-# frequencies = [400.36, 400.48, 400.63, 400.75, 400.89]
-#frequencies = [400.5, 401.0, 401.5]
-# frequencies = [400.48, 400.63]
+# Some fundamental explanation can be found at
+# https://www.shure.com/en-US/performance-production/louder/all-about-wireless-intermodulation-distortion
 
-# rogue sondes were on 400.63 and 400.49
-
-# first start was on 400.01, 400.13 and 400.25
-
-# was 400.37 already in the air?
-
-#400.69 400.81
-
-#frequencies = [400.01, 400.05, 400.21, 400.25, 400.57, 400.77, 405.29, 405.67, 404.01, 401.73, 404.95, 401.39]
-#frequencies = [400.03, 400.11, 400.23, 400.31, 400.67, 400.97, 405.29, 405.67]
-
-frequencies = [400.250, 400.625, 401.00, 401.375, 401.75, 402.125, 402.5, 402.875, 403.25, 403.625, 404.0, 404.375, 404.75, 405.125, 405.5, 405.875]
+frequencies = [400.11, 400.67, 401.09, 401.27, 401.67, 402.11, 402.49, 402.81, 403.17, 403.61, 403.99, 404.27, 404.61, 405.03, 405.31, 405.91]
 
 
-threshold = 0.035
+threshold = 0.035 # minimum deviation to an intermodulation product needs to be 35 kHz
 
 class IMProduct:
     def __init__(self, freq, parents, type):
@@ -41,8 +27,7 @@ if __name__ == '__main__':
     for combination in combinations:
         f1 = combination[0]
         f2 = combination[1]
-        #im3.append(round(2 * f1 - f2, 3))
-        #im3.append(round(2 * f2 - f1, 3))
+
         im.append(IMProduct(round(2 * f1 - f2, 3), [f1, f2], 'IM3'))
         im.append(IMProduct(round(2 * f2 - f1, 3), [f1, f2], 'IM3'))
         im.append(IMProduct(round(3 * f1 - 2 * f2, 3), [f1, f2], 'IM5'))
